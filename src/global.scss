@@ -9,6 +9,9 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+/* Písmo přibalené v aplikaci, funguje i bez internetu */
+@import "@fontsource-variable/nunito";
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -35,3 +38,103 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ----------------------------------------------------------------------------
+ * Společné styly aplikace
+ * ------------------------------------------------------------------------- */
+
+ion-toolbar.app-toolbar {
+  --border-width: 0;
+  padding-top: 0.25rem;
+}
+
+ion-toolbar.app-toolbar ion-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+ion-button {
+  --border-radius: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+ion-tab-bar {
+  --border: 1px solid var(--app-border);
+  height: 4rem;
+}
+
+ion-tab-button {
+  font-weight: 700;
+}
+
+.page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding-bottom: 6rem;
+}
+
+.card {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow);
+}
+
+.section-label {
+  margin: 0 0 0.6rem;
+  color: var(--app-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--app-muted);
+}
+
+.error-banner,
+.success-banner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.9rem;
+  font-weight: 600;
+}
+
+.error-banner {
+  background: rgba(var(--ion-color-danger-rgb), 0.12);
+  color: var(--ion-color-danger);
+}
+
+.success-banner {
+  background: var(--app-accent-soft);
+  color: var(--ion-color-primary-shade);
+}
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-state .emoji {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 3.5rem;
+}
+
+.empty-state h2 {
+  margin: 0 0 0.25rem;
+  font-weight: 800;
+}
+
+/* Vstupní pole se zaoblenými rohy */
+ion-input.app-input {
+  --background: var(--app-surface);
+  --border-radius: 0.9rem;
+  --highlight-color-focused: var(--ion-color-primary);
+}

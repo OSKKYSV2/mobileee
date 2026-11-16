@@ -9,6 +9,7 @@ export interface ShoppingItem {
   photoFile: string | null;
 }
 
+// Pořadí odpovídá cestě obchodem.
 export const CATEGORIES = [
   'Ovoce a zelenina',
   'Pečivo',
@@ -19,3 +20,18 @@ export const CATEGORIES = [
   'Drogerie',
   'Ostatní',
 ];
+
+const CATEGORY_ICONS: Record<string, string> = {
+  'Ovoce a zelenina': '🥦',
+  Pečivo: '🥖',
+  'Mléčné výrobky': '🧀',
+  'Maso a uzeniny': '🥩',
+  'Trvanlivé potraviny': '🥫',
+  Nápoje: '🧃',
+  Drogerie: '🧴',
+  Ostatní: '🛍️',
+};
+
+export function categoryIcon(category: string): string {
+  return CATEGORY_ICONS[category] ?? '🛒';
+}

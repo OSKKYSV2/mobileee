@@ -1,49 +1,68 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="success">
+<ion-header class="ion-no-border">
+  <ion-toolbar class="app-toolbar">
     <ion-title>Účet</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="page-content">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Přihlášený účet</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
+<ion-content class="ion-padding">
+  <div class="page">
+    <section class="card profile">
+      <div class="avatar" aria-hidden="true">{{ initial() }}</div>
+      <div class="profile-text">
+        <span class="muted">Přihlášen jako</span>
         @if (auth.user(); as user) {
-          <p class="email">{{ user.email }}</p>
+          <strong class="email">{{ user.email }}</strong>
         }
-        <p>
-          Položek v seznamu: <strong>{{ list.items().length }}</strong>, z toho ke koupi:
-          <strong>{{ openCount() }}</strong>
-        </p>
-        <p class="hint">
-          Přihlaste se stejným účtem na dalším telefonu a seznam se bude synchronizovat v reálném čase.
-        </p>
-        @if (logoutError()) {
-          <p class="error-message" role="alert">{{ logoutError() }}</p>
-        }
-        <ion-button expand="block" fill="outline" color="danger" [disabled]="signingOut()" (click)="logout()">
-          Odhlásit se
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </section>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>O aplikaci</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Autoři: Oskar Kment, [druhý člen týmu]</p>
-        <p>AP5PM 2026 – závěrečný projekt</p>
-        <p>Ionic, Angular, Capacitor, Firebase</p>
-        <p>
-          Návrhy produktů:
-          <a href="https://world.openfoodfacts.org/">Open Food Facts</a>
-          (<a href="https://opendatacommons.org/licenses/odbl/1-0/">licence ODbL</a>)
-        </p>
-      </ion-card-content>
-    </ion-card>
+    <div class="stats">
+      <div class="stat card">
+        <strong>{{ list.items().length }}</strong>
+        <span class="muted">celkem</span>
+      </div>
+      <div class="stat card">
+        <strong>{{ openCount() }}</strong>
+        <span class="muted">koupit</span>
+      </div>
+      <div class="stat card">
+        <strong class="done">{{ boughtCount() }}</strong>
+        <span class="muted">koupeno</span>
+      </div>
+    </div>
+
+    <section class="card tip">
+      <span class="tip-icon" aria-hidden="true">📱</span>
+      <p>
+        Přihlaste se <strong>stejným účtem</strong> i na telefonu partnera nebo spolubydlícího. Seznam se vám bude
+        synchronizovat v reálném čase.
+      </p>
+    </section>
+
+    @if (logoutError()) {
+      <p class="error-banner" role="alert">{{ logoutError() }}</p>
+    }
+    <ion-button expand="block" fill="outline" color="danger" [disabled]="signingOut()" (click)="logout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Odhlásit se
+    </ion-button>
+
+    <section class="about">
+      <p class="section-label">O aplikaci</p>
+      <p>Nákupní seznam · AP5PM 2026 · závěrečný projekt</p>
+      <p class="muted">Autoři: Oskar Kment, [druhý člen týmu]</p>
+      <div class="tags">
+        <span>Ionic</span>
+        <span>Angular</span>
+        <span>Capacitor</span>
+        <span>Firebase</span>
+        <span>Open Food Facts</span>
+      </div>
+      <p class="muted small">
+        Návrhy produktů:
+        <a href="https://world.openfoodfacts.org/">Open Food Facts</a>
+        (<a href="https://opendatacommons.org/licenses/odbl/1-0/">licence ODbL</a>)
+      </p>
+    </section>
   </div>
 </ion-content>

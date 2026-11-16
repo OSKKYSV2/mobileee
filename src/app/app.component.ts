@@ -1,16 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule, type NgForm } from '@angular/forms';
-import {
-  IonApp,
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonRouterOutlet,
-  IonSpinner,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular';
+import { IonApp, IonButton, IonContent, IonInput, IonRouterOutlet, IonSpinner } from '@ionic/angular';
 import { FirebaseError } from 'firebase/app';
 
 import { AuthService } from './services/auth.service';
@@ -19,18 +9,7 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  imports: [
-    FormsModule,
-    IonApp,
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonInput,
-    IonRouterOutlet,
-    IonSpinner,
-    IonTitle,
-    IonToolbar,
-  ],
+  imports: [FormsModule, IonApp, IonButton, IonContent, IonInput, IonRouterOutlet, IonSpinner],
 })
 export class AppComponent {
   readonly auth = inject(AuthService);

@@ -2,27 +2,20 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonButton,
-  IonCard,
-  IonCardContent,
   IonContent,
   IonHeader,
   IonIcon,
   IonImg,
   IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonSelect,
-  IonSelectOption,
   IonSpinner,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { camera, search } from 'ionicons/icons';
+import { cameraOutline, close, search } from 'ionicons/icons';
 
 import type { ProductSuggestion } from '../models/product-suggestion';
-import { CATEGORIES } from '../models/shopping-item';
+import { CATEGORIES, categoryIcon } from '../models/shopping-item';
 import { PhotoService } from '../services/photo.service';
 import { ProductApiService } from '../services/product-api.service';
 import { ShoppingListService } from '../services/shopping-list.service';
@@ -31,25 +24,7 @@ import { ShoppingListService } from '../services/shopping-list.service';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [
-    FormsModule,
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonContent,
-    IonHeader,
-    IonIcon,
-    IonImg,
-    IonInput,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonSelect,
-    IonSelectOption,
-    IonSpinner,
-    IonTitle,
-    IonToolbar,
-  ],
+  imports: [FormsModule, IonButton, IonContent, IonHeader, IonIcon, IonImg, IonInput, IonSpinner, IonTitle, IonToolbar],
 })
 export class Tab2Page {
   private readonly list = inject(ShoppingListService);
@@ -73,7 +48,11 @@ export class Tab2Page {
   readonly searchError = signal('');
 
   constructor() {
-    addIcons({ camera, search });
+    addIcons({ cameraOutline, close, search });
+  }
+
+  icon(category: string): string {
+    return categoryIcon(category);
   }
 
   async findProducts(): Promise<void> {

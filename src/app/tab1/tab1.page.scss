@@ -1,34 +1,106 @@
-.page-content {
-  max-width: 40rem;
-  margin: 0 auto;
+.progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  background: linear-gradient(135deg, var(--app-accent-soft), var(--app-surface) 70%);
 }
 
-.summary {
-  font-size: 1.1rem;
-  text-align: center;
+.progress-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.filters {
+.progress-text strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.progress-text span {
+  font-size: 0.9rem;
+}
+
+.percent {
+  color: var(--ion-color-primary);
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  height: 0.6rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--app-border);
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 1rem;
+  background: var(--ion-color-primary);
+  transition: width 0.4s ease;
+}
+
+/* Přepínač filtru ve stylu segmentu */
+.segment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+  margin: 0 0 1.25rem;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  background: var(--app-surface-soft);
+}
+
+.segment button {
+  padding: 0.6rem 0;
+  border: 0;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: var(--app-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.segment button.active {
+  background: var(--app-surface);
+  color: var(--ion-text-color);
+  box-shadow: var(--app-shadow);
+}
+
+.group-title {
   display: flex;
   gap: 0.5rem;
-  justify-content: center;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin: 0 0 0.5rem 0.25rem;
+  font-size: 1rem;
+  font-weight: 800;
 }
 
-ion-list {
-  margin-bottom: 1rem;
+.group-icon {
+  font-size: 1.25rem;
 }
 
-.state-message {
-  margin: 2rem 0;
-  color: var(--ion-color-medium);
-  text-align: center;
+.count {
+  padding: 0.05rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--app-surface-soft);
+  color: var(--app-muted);
+  font-size: 0.8rem;
 }
 
-.big {
-  font-size: 3rem;
+.list-card {
+  padding: 0.25rem 0;
 }
 
-.error-message {
-  color: var(--ion-color-danger);
+.clear-button {
+  margin-top: 0.5rem;
+}
+
+ion-fab-button {
+  --border-radius: 1.2rem;
+  --box-shadow: 0 10px 24px rgba(var(--ion-color-primary-rgb), 0.4);
 }

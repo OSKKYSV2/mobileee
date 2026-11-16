@@ -1,31 +1,34 @@
 <ion-app>
   @if (!auth.ready()) {
-    <ion-content class="ion-padding">
-      <div class="state-message" role="status">
-        <ion-spinner aria-hidden="true"></ion-spinner>
-        <p>Ověřuji přihlášení…</p>
+    <ion-content>
+      <div class="splash" role="status">
+        <img src="assets/icon/favicon.png" alt="" class="logo" />
+        <ion-spinner name="dots" aria-hidden="true"></ion-spinner>
+        <p class="muted">Ověřuji přihlášení…</p>
       </div>
     </ion-content>
   } @else if (auth.user()) {
     <ion-router-outlet></ion-router-outlet>
   } @else {
-    <ion-header>
-      <ion-toolbar color="success">
-        <ion-title>{{ registering ? 'Registrace' : 'Přihlášení' }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-content class="ion-padding">
       <div class="login">
-        <h1>🛒 Nákupní seznam</h1>
-        <p class="hint">Přihlaste se a sdílejte seznam s celou domácností.</p>
+        <div class="hero">
+          <img src="assets/icon/favicon.png" alt="" class="logo" />
+          <h1>Nákupní seznam</h1>
+          <p class="muted">Jeden seznam pro celou domácnost. Co přidáte, ostatní hned uvidí.</p>
+        </div>
 
-        <form #form="ngForm" (ngSubmit)="submit(form)">
+        <form class="card" #form="ngForm" (ngSubmit)="submit(form)">
+          <h2>{{ registering ? 'Vytvořit účet' : 'Přihlášení' }}</h2>
+
           <ion-input
+            class="app-input"
             label="E-mail"
             labelPlacement="stacked"
             fill="outline"
             type="email"
             autocomplete="email"
+            placeholder="jmeno@example.com"
             name="email"
             [(ngModel)]="email"
             [disabled]="busy()"
@@ -33,27 +36,39 @@
             email
           ></ion-input>
           <ion-input
+            class="app-input"
             label="Heslo"
             labelPlacement="stacked"
             fill="outline"
             type="password"
             [autocomplete]="registering ? 'new-password' : 'current-password'"
+            [placeholder]="registering ? 'Alespoň 6 znaků' : ''"
             name="password"
             [(ngModel)]="password"
             [disabled]="busy()"
             required
             minlength="6"
           ></ion-input>
+
           @if (errorMessage()) {
-            <p class="error-message" role="alert">{{ errorMessage() }}</p>
+            <p class="error-banner" role="alert">{{ errorMessage() }}</p>
           }
-          <ion-button type="submit" expand="block" color="success" [disabled]="form.invalid || busy()">
-            {{ registering ? 'Vytvořit účet' : 'Přihlásit se' }}
-          </ion-button>
-          <ion-button type="button" fill="clear" expand="block" [disabled]="busy()" (click)="toggleMode()">
-            {{ registering ? 'Už mám účet' : 'Chci vytvořit účet' }}
+
+          <ion-button type="submit" expand="block" size="large" [disabled]="form.invalid || busy()">
+            @if (busy()) {
+              <ion-spinner name="dots" aria-hidden="true"></ion-spinner>
+            } @else {
+              {{ registering ? 'Vytvořit účet' : 'Přihlásit se' }}
+            }
           </ion-button>
         </form>
+
+        <p class="switch">
+          {{ registering ? 'Už máte účet?' : 'Ještě nemáte účet?' }}
+          <button type="button" [disabled]="busy()" (click)="toggleMode()">
+            {{ registering ? 'Přihlaste se' : 'Zaregistrujte se' }}
+          </button>
+        </p>
       </div>
     </ion-content>
   }

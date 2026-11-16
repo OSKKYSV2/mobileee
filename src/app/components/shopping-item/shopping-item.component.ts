@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, input, output } from '@angular/core';
-import { IonButton, IonIcon, IonImg, IonItem, IonLabel } from '@ionic/angular';
+import { IonIcon, IonImg } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { checkmarkCircle, ellipseOutline, trashOutline } from 'ionicons/icons';
+import { checkmark, trashOutline } from 'ionicons/icons';
 
 import type { ShoppingItem } from '../../models/shopping-item';
 import { PhotoService } from '../../services/photo.service';
@@ -10,7 +10,7 @@ import { PhotoService } from '../../services/photo.service';
   selector: 'app-shopping-item',
   templateUrl: './shopping-item.component.html',
   styleUrls: ['./shopping-item.component.scss'],
-  imports: [IonButton, IonIcon, IonImg, IonItem, IonLabel],
+  imports: [IonIcon, IonImg],
 })
 export class ShoppingItemComponent {
   private readonly photos = inject(PhotoService);
@@ -27,7 +27,7 @@ export class ShoppingItemComponent {
   });
 
   constructor() {
-    addIcons({ checkmarkCircle, ellipseOutline, trashOutline });
+    addIcons({ checkmark, trashOutline });
 
     // Při zobrazení položky s fotkou načteme soubor z úložiště.
     effect(() => {

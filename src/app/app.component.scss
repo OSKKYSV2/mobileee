@@ -1,26 +1,67 @@
+.splash {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .login {
-  max-width: 28rem;
-  margin: 2rem auto;
+  max-width: 26rem;
+  margin: 0 auto;
+  padding-top: max(3rem, 8vh);
 }
 
-.login h1 {
+.hero {
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
-.hint,
-.state-message {
-  color: var(--ion-color-medium);
-  text-align: center;
+.logo {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 1.6rem;
+  box-shadow: 0 10px 30px rgba(var(--ion-color-primary-rgb), 0.35);
 }
 
-.state-message {
-  margin-top: 40vh;
+.hero h1 {
+  margin: 1rem 0 0.25rem;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.hero p {
+  margin: 0 auto;
+  max-width: 20rem;
+}
+
+.card h2 {
+  margin: 0.25rem 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 800;
 }
 
 ion-input {
   margin-bottom: 1rem;
 }
 
-.error-message {
-  color: var(--ion-color-danger);
+ion-button {
+  margin-top: 0.5rem;
+}
+
+.switch {
+  color: var(--app-muted);
+  text-align: center;
+}
+
+.switch button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ion-color-primary);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
 }

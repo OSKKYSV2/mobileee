@@ -1,44 +1,46 @@
-<ion-item [class.bought]="item().bought">
-  <ion-button
-    slot="start"
-    fill="clear"
-    [color]="item().bought ? 'success' : 'medium'"
+<div class="row" [class.bought]="item().bought">
+  <button
+    type="button"
+    class="check"
     [attr.aria-label]="item().bought ? 'Označit jako nekoupené' : 'Označit jako koupené'"
+    [attr.aria-pressed]="item().bought"
     (click)="toggle()"
   >
-    <ion-icon slot="icon-only" [name]="item().bought ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
-  </ion-button>
+    @if (item().bought) {
+      <ion-icon name="checkmark" aria-hidden="true"></ion-icon>
+    }
+  </button>
 
   @if (photoUrl(); as url) {
-    <div slot="start" class="photo">
+    <div class="photo">
       <ion-img [src]="url" [alt]="item().name"></ion-img>
     </div>
   }
 
-  <ion-label>
-    <h2 class="name">{{ item().name }}</h2>
+  <div class="text">
+    <span class="name">{{ item().name }}</span>
     @if (item().photoFile && photoUrl() === '') {
-      <p>Fotka je uložená v jiném telefonu.</p>
+      <span class="note">📷 fotka je v jiném telefonu</span>
     }
-  </ion-label>
+  </div>
 
-  <div slot="end" class="quantity">
-    <ion-button
-      fill="clear"
-      size="small"
+  <div class="stepper" [class.hidden]="item().bought">
+    <button
+      type="button"
       aria-label="Snížit množství"
       [disabled]="item().quantity <= 1 || item().bought"
       (click)="decrease()"
     >
       −
-    </ion-button>
-    <span class="quantity-value">{{ item().quantity }}×</span>
-    <ion-button fill="clear" size="small" aria-label="Zvýšit množství" [disabled]="item().bought" (click)="increase()">
-      +
-    </ion-button>
+    </button>
+    <span class="quantity">{{ item().quantity }}</span>
+    <button type="button" aria-label="Zvýšit množství" [disabled]="item().bought" (click)="increase()">+</button>
   </div>
+  @if (item().bought) {
+    <span class="quantity-done">{{ item().quantity }}×</span>
+  }
 
-  <ion-button slot="end" fill="clear" color="danger" aria-label="Odstranit položku" (click)="removed.emit()">
-    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-  </ion-button>
-</ion-item>
+  <button type="button" class="delete" aria-label="Odstranit položku" (click)="removed.emit()">
+    <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
+  </button>
+</div>

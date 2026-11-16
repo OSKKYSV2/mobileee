@@ -1,6 +1,7 @@
 import { signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { ShoppingItem } from '../models/shopping-item';
@@ -31,6 +32,7 @@ describe('Tab1Page', () => {
 
     TestBed.configureTestingModule({
       providers: [
+        provideRouter([]),
         {
           provide: ShoppingListService,
           useValue: { items, initialized: signal(true), errorMessage: signal('') },
@@ -45,13 +47,15 @@ describe('Tab1Page', () => {
   });
 
   it('should show the empty state', () => {
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Seznam je prázdný.');
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Seznam je prázdný');
   });
 
   it('should count items and apply the filter', () => {
     items.set([item('rohlik', false), item('chleba', true)]);
 
     expect(component.openCount()).toBe(1);
+    expect(component.progress()).toBe(50);
+    expect(component.openLabel()).toBe('1 věc');
     expect(component.boughtCount()).toBe(1);
 
     component.filter.set('bought');

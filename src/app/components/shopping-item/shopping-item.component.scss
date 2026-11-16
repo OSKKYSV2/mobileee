@@ -1,13 +1,59 @@
-.bought .name {
-  color: var(--ion-color-medium);
-  text-decoration: line-through;
+:host {
+  display: block;
+}
+
+:host + :host .row {
+  border-top: 1px solid var(--app-border);
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 3.75rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Kulaté zaškrtávátko */
+.check {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 2px solid var(--app-border);
+  border-radius: 50%;
+  color: var(--ion-color-primary-contrast);
+  font-size: 1.1rem;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.check:hover {
+  border-color: var(--ion-color-primary);
+}
+
+.bought .check {
+  border-color: var(--ion-color-primary);
+  background: var(--ion-color-primary);
 }
 
 .photo {
-  width: 3rem;
-  height: 3rem;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 .photo ion-img {
@@ -16,17 +62,82 @@
   object-fit: cover;
 }
 
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .name {
+  font-size: 1.05rem;
+  font-weight: 700;
   overflow-wrap: anywhere;
 }
 
-.quantity {
-  display: flex;
-  align-items: center;
+.bought .name {
+  color: var(--app-muted);
+  text-decoration: line-through;
 }
 
-.quantity-value {
-  min-width: 2rem;
-  font-weight: 700;
+.bought .photo {
+  opacity: 0.5;
+}
+
+.note {
+  color: var(--app-muted);
+  font-size: 0.8rem;
+}
+
+/* Množství jako „pilulka“ s tlačítky − a + */
+.stepper {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  border-radius: 2rem;
+  background: var(--app-surface-soft);
+}
+
+.stepper.hidden {
+  display: none;
+}
+
+.stepper button {
+  width: 2rem;
+  height: 2rem;
+  color: var(--ion-color-primary);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.stepper button:disabled {
+  color: var(--app-border);
+  cursor: default;
+}
+
+.quantity {
+  min-width: 1.25rem;
+  font-weight: 800;
   text-align: center;
+}
+
+.quantity-done {
+  color: var(--app-muted);
+  font-weight: 700;
+}
+
+.delete {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  color: var(--app-muted);
+  font-size: 1.15rem;
+}
+
+.delete:hover {
+  background: rgba(var(--ion-color-danger-rgb), 0.12);
+  color: var(--ion-color-danger);
 }

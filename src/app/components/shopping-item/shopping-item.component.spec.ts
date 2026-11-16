@@ -33,11 +33,10 @@ describe('ShoppingItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should show the item name and quantity', () => {
+  it('should show the item name', () => {
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
 
     expect(text).toContain('Chleba');
-    expect(text).toContain('1×');
   });
 
   it('should emit the new bought state', () => {

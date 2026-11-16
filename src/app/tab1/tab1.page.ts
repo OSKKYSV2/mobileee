@@ -1,21 +1,25 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AlertController,
   IonButton,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonHeader,
-  IonLabel,
-  IonList,
-  IonListHeader,
+  IonIcon,
   IonSpinner,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
 
 import { ShoppingItemComponent } from '../components/shopping-item/shopping-item.component';
 import type { ItemFilter } from '../models/list-utils';
 import { countOpen, filterItems, groupByCategory } from '../models/list-utils';
 import type { ShoppingItem } from '../models/shopping-item';
+import { categoryIcon } from '../models/shopping-item';
 import { ShoppingListService } from '../services/shopping-list.service';
 
 @Component({
@@ -25,10 +29,10 @@ import { ShoppingListService } from '../services/shopping-list.service';
   imports: [
     IonButton,
     IonContent,
+    IonFab,
+    IonFabButton,
     IonHeader,
-    IonLabel,
-    IonList,
-    IonListHeader,
+    IonIcon,
     IonSpinner,
     IonTitle,
     IonToolbar,
@@ -38,6 +42,7 @@ import { ShoppingListService } from '../services/shopping-list.service';
 export class Tab1Page {
   readonly list = inject(ShoppingListService);
   private readonly alerts = inject(AlertController);
+  private readonly router = inject(Router);
 
   readonly filter = signal<ItemFilter>('all');
   readonly filters: { value: ItemFilter; label: string }[] = [
@@ -50,6 +55,28 @@ export class Tab1Page {
   readonly groups = computed(() => groupByCategory(filterItems(this.list.items(), this.filter())));
   readonly openCount = computed(() => countOpen(this.list.items()));
   readonly boughtCount = computed(() => this.list.items().length - this.openCount());
+  readonly progress = computed(() => {
+    const total = this.list.items().length;
+    return total === 0 ? 0 : Math.round((this.boughtCount() / total) * 100);
+  });
+  // Česká koncovka: 1 věc, 2–4 věci, 5 a více věcí.
+  readonly openLabel = computed(() => {
+    const count = this.openCount();
+    const word = count === 1 ? 'věc' : count < 5 ? 'věci' : 'věcí';
+    return `${count} ${word}`;
+  });
+
+  constructor() {
+    addIcons({ add });
+  }
+
+  icon(category: string): string {
+    return categoryIcon(category);
+  }
+
+  async goToAdd(): Promise<void> {
+    await this.router.navigateByUrl('/tabs/tab2');
+  }
 
   async toggle(item: ShoppingItem, bought: boolean): Promise<void> {
     await this.list.setBought(item, bought);

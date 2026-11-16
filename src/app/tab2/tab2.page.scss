@@ -1,8 +1,3 @@
-.page-content {
-  max-width: 40rem;
-  margin: 0 auto;
-}
-
 .name-row {
   display: flex;
   gap: 0.5rem;
@@ -13,56 +8,179 @@
   flex: 1;
 }
 
-.quantity-row,
-.photo-row {
+.search-button {
+  --padding-start: 0.9rem;
+  --padding-end: 0.9rem;
+  height: 3.5rem;
+  margin: 0;
+}
+
+.hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+}
+
+/* Návrhy produktů jako „čipy“ */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--app-border);
+  border-radius: 1rem;
+  background: var(--app-surface-soft);
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--ion-color-primary);
+}
+
+.brand {
+  color: var(--app-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.quantity-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem 0;
+}
+
+.quantity-card .section-label {
+  margin: 0;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border-radius: 2rem;
+  background: var(--app-surface-soft);
+}
+
+.stepper button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: none;
+  color: var(--ion-color-primary);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.stepper button:disabled {
+  color: var(--app-border);
+  cursor: default;
 }
 
 .quantity {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.quantity-value {
   min-width: 2rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 900;
   text-align: center;
 }
 
-.photo {
-  width: 6rem;
-  height: 6rem;
-  overflow: hidden;
-  border-radius: 0.5rem;
+/* Kategorie jako dlaždice */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
 }
 
-.photo ion-img {
+.category {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.7rem 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  background: var(--app-surface-soft);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.category.selected {
+  border-color: var(--ion-color-primary);
+  background: var(--app-accent-soft);
+}
+
+.category-icon {
+  font-size: 1.35rem;
+}
+
+.photo-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.25rem;
+  border: 2px dashed var(--app-border);
+  border-radius: 1rem;
+  background: none;
+  color: var(--app-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.photo-button ion-icon {
+  font-size: 1.5rem;
+}
+
+.photo-preview {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.photo-preview ion-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.hint,
-.state-message {
-  color: var(--ion-color-medium);
+.photo-remove {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  cursor: pointer;
 }
 
-.state-message {
-  margin: 1rem 0;
-  text-align: center;
+.photo-error {
+  margin: 0.75rem 0 0;
 }
 
-.error-message {
-  color: var(--ion-color-danger);
-}
-
-.saved-message {
-  color: var(--ion-color-success);
-  font-weight: 600;
-  text-align: center;
+.save-button {
+  margin-top: 0.5rem;
 }
