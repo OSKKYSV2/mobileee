@@ -1,0 +1,7 @@
+{
+  "name": "nakupni-seznam",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
