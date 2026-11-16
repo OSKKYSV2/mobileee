@@ -1,0 +1,18 @@
+.page-content {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.email {
+  font-size: 1.1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.hint {
+  color: var(--ion-color-medium);
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+}

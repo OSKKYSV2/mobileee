@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   RouteReuseStrategy,
@@ -7,14 +8,19 @@ import {
   PreloadAllModules,
 } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+
+// Webová varianta fotoaparátu pro běh v prohlížeči.
+defineCustomElements(window);
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
+    provideHttpClient(),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
   ],
-});
+}).catch((error: unknown) => console.error(error));

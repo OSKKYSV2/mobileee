@@ -1,0 +1,26 @@
+.login {
+  max-width: 28rem;
+  margin: 2rem auto;
+}
+
+.login h1 {
+  text-align: center;
+}
+
+.hint,
+.state-message {
+  color: var(--ion-color-medium);
+  text-align: center;
+}
+
+.state-message {
+  margin-top: 40vh;
+}
+
+ion-input {
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+}

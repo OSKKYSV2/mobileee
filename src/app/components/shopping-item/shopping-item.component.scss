@@ -1,0 +1,32 @@
+.bought .name {
+  color: var(--ion-color-medium);
+  text-decoration: line-through;
+}
+
+.photo {
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.photo ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-value {
+  min-width: 2rem;
+  font-weight: 700;
+  text-align: center;
+}

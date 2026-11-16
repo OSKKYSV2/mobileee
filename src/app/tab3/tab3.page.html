@@ -1,15 +1,49 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Tab 3 </ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Účet</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="page-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Přihlášený účet</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        @if (auth.user(); as user) {
+          <p class="email">{{ user.email }}</p>
+        }
+        <p>
+          Položek v seznamu: <strong>{{ list.items().length }}</strong>, z toho ke koupi:
+          <strong>{{ openCount() }}</strong>
+        </p>
+        <p class="hint">
+          Přihlaste se stejným účtem na dalším telefonu a seznam se bude synchronizovat v reálném čase.
+        </p>
+        @if (logoutError()) {
+          <p class="error-message" role="alert">{{ logoutError() }}</p>
+        }
+        <ion-button expand="block" fill="outline" color="danger" [disabled]="signingOut()" (click)="logout()">
+          Odhlásit se
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>O aplikaci</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Autoři: Oskar Kment, [druhý člen týmu]</p>
+        <p>AP5PM 2026 – závěrečný projekt</p>
+        <p>Ionic, Angular, Capacitor, Firebase</p>
+        <p>
+          Návrhy produktů:
+          <a href="https://world.openfoodfacts.org/">Open Food Facts</a>
+          (<a href="https://opendatacommons.org/licenses/odbl/1-0/">licence ODbL</a>)
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

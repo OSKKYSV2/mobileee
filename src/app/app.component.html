@@ -1,3 +1,60 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  @if (!auth.ready()) {
+    <ion-content class="ion-padding">
+      <div class="state-message" role="status">
+        <ion-spinner aria-hidden="true"></ion-spinner>
+        <p>Ověřuji přihlášení…</p>
+      </div>
+    </ion-content>
+  } @else if (auth.user()) {
+    <ion-router-outlet></ion-router-outlet>
+  } @else {
+    <ion-header>
+      <ion-toolbar color="success">
+        <ion-title>{{ registering ? 'Registrace' : 'Přihlášení' }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="login">
+        <h1>🛒 Nákupní seznam</h1>
+        <p class="hint">Přihlaste se a sdílejte seznam s celou domácností.</p>
+
+        <form #form="ngForm" (ngSubmit)="submit(form)">
+          <ion-input
+            label="E-mail"
+            labelPlacement="stacked"
+            fill="outline"
+            type="email"
+            autocomplete="email"
+            name="email"
+            [(ngModel)]="email"
+            [disabled]="busy()"
+            required
+            email
+          ></ion-input>
+          <ion-input
+            label="Heslo"
+            labelPlacement="stacked"
+            fill="outline"
+            type="password"
+            [autocomplete]="registering ? 'new-password' : 'current-password'"
+            name="password"
+            [(ngModel)]="password"
+            [disabled]="busy()"
+            required
+            minlength="6"
+          ></ion-input>
+          @if (errorMessage()) {
+            <p class="error-message" role="alert">{{ errorMessage() }}</p>
+          }
+          <ion-button type="submit" expand="block" color="success" [disabled]="form.invalid || busy()">
+            {{ registering ? 'Vytvořit účet' : 'Přihlásit se' }}
+          </ion-button>
+          <ion-button type="button" fill="clear" expand="block" [disabled]="busy()" (click)="toggleMode()">
+            {{ registering ? 'Už mám účet' : 'Chci vytvořit účet' }}
+          </ion-button>
+        </form>
+      </div>
+    </ion-content>
+  }
 </ion-app>

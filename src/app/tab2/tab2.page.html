@@ -1,15 +1,106 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Tab 2 </ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Přidat položku</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="page-content">
+    <ion-card>
+      <ion-card-content>
+        <div class="name-row">
+          <ion-input
+            label="Název"
+            labelPlacement="stacked"
+            fill="outline"
+            placeholder="Například mléko"
+            [(ngModel)]="name"
+            (ionInput)="savedMessage.set('')"
+          ></ion-input>
+          <ion-button
+            fill="outline"
+            color="success"
+            aria-label="Najít produkty"
+            [disabled]="name.trim().length < 2 || searching()"
+            (click)="findProducts()"
+          >
+            <ion-icon slot="icon-only" name="search"></ion-icon>
+          </ion-button>
+        </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+        @if (searching()) {
+          <div class="state-message" role="status">
+            <ion-spinner aria-hidden="true"></ion-spinner>
+            <p>Hledám produkty…</p>
+          </div>
+        } @else if (searchError()) {
+          <p class="state-message error-message" role="alert">{{ searchError() }}</p>
+        } @else if (suggestions().length > 0) {
+          <p class="hint">Návrhy z Open Food Facts – klepnutím vyberete:</p>
+          <ion-list>
+            @for (product of suggestions(); track product.code) {
+              <ion-item button (click)="pickSuggestion(product)">
+                <ion-label>
+                  <h3>{{ product.name }}</h3>
+                  @if (product.brand) {
+                    <p>{{ product.brand }}</p>
+                  }
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        } @else if (searched()) {
+          <p class="state-message">Žádný produkt nenalezen, název můžete napsat vlastní.</p>
+        }
+
+        <div class="quantity-row">
+          <span>Množství</span>
+          <div class="quantity">
+            <ion-button fill="outline" [disabled]="quantity <= 1" (click)="decrease()">−</ion-button>
+            <span class="quantity-value">{{ quantity }}</span>
+            <ion-button fill="outline" (click)="increase()">+</ion-button>
+          </div>
+        </div>
+
+        <ion-select
+          label="Kategorie"
+          labelPlacement="stacked"
+          fill="outline"
+          interface="alert"
+          cancelText="Zrušit"
+          okText="Vybrat"
+          [(ngModel)]="category"
+        >
+          @for (option of categories; track option) {
+            <ion-select-option [value]="option">{{ option }}</ion-select-option>
+          }
+        </ion-select>
+
+        <div class="photo-row">
+          @if (photoFile(); as file) {
+            <div class="photo">
+              <ion-img [src]="photos.urls()[file]" alt="Fotka produktu"></ion-img>
+            </div>
+            <ion-button fill="clear" color="danger" (click)="removePhoto()">Odebrat fotku</ion-button>
+          } @else {
+            <ion-button fill="outline" (click)="takePhoto()">
+              <ion-icon slot="start" name="camera"></ion-icon>
+              Vyfotit produkt
+            </ion-button>
+          }
+        </div>
+        @if (photoError()) {
+          <p class="error-message" role="alert">{{ photoError() }}</p>
+        }
+
+        <ion-button expand="block" color="success" [disabled]="!name.trim()" (click)="save()">
+          Přidat do seznamu
+        </ion-button>
+
+        @if (savedMessage()) {
+          <p class="saved-message" role="status">✓ {{ savedMessage() }}</p>
+        }
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
