@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nákupní seznam</string>
+    <string name="title_activity_main">Nákupní seznam</string>
+    <string name="package_name">cz.utb.fai.ap5pm.nakupniseznam</string>
+    <string name="custom_url_scheme">cz.utb.fai.ap5pm.nakupniseznam</string>
+</resources>
